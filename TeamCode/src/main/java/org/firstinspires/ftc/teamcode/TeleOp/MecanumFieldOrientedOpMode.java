@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode.TeleOp;
 
+import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.gamepad1;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -18,13 +20,9 @@ public class MecanumFieldOrientedOpMode extends OpMode {
 
     @Override
     public void loop() {
-        forward = gamepad1.left_stick_y;
-        strafe = gamepad1.left_stick_x;
-        rotate = gamepad1.right_stick_x;
-
-        drive.fieldOrientedDrive(forward, strafe,rotate);
-        if (gamepad1.y) {
-            drive.rev_imu.resetYaw();
-        }
+        drive.runMecanumDrive(gamepad1.right_bumper, gamepad1.left_bumper,
+                -gamepad1.left_stick_y, gamepad1.left_stick_x,
+                gamepad1.right_stick_x * .8, gamepad1.y);
     }
+
 }
