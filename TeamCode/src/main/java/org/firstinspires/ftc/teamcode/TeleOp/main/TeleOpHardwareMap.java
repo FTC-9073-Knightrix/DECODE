@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.TeleOp;
+package org.firstinspires.ftc.teamcode.TeleOp.main;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 public abstract class TeleOpHardwareMap extends OpMode {

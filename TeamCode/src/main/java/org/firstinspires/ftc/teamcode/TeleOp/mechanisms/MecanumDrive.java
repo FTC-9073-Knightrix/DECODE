@@ -15,7 +15,6 @@ import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 public class MecanumDrive {
     public DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
     public IMU rev_imu;
-    public double finalSlowMode = 0.0;
     public YawPitchRollAngles orientation;
     public void init(HardwareMap hwMap) {
         frontLeftMotor = hwMap.get(DcMotor.class, "frontLeftMotor");
@@ -43,6 +42,7 @@ public class MecanumDrive {
     public void runMecanumDrive(boolean rb, boolean lb, double y, double x, double rx, boolean yButton) {
         // Only update the heading because that is all you need in Teleop
 //        pinpoint.update(GoBildaPinpointDriver.readData.ONLY_UPDATE_HEADING);
+        double finalSlowMode = 0.0;
         final double driveSpeed = 0.66;
         final double fastSpeed = 1.0;
         final double slowSpeed = 0.35;
@@ -67,8 +67,6 @@ public class MecanumDrive {
 
         if (yButton) {
             rev_imu.resetYaw();
-//            pinpoint.resetPosAndIMU();
-//            pinpoint.recalibrateIMU();
         }
 
         orientation = rev_imu.getRobotYawPitchRollAngles();
@@ -88,17 +86,13 @@ public class MecanumDrive {
         double frontRightPower = (rotY - rotX - rx) / denominator;
         double backRightPower = (rotY + rotX - rx) / denominator;
 
-//        this.frontLeftMotor.set(frontLeftPower * finalSlowMode);
-//        this.backLeftMotor.set(backLeftPower * finalSlowMode);
-//        this.frontRightMotor.set(frontRightPower * finalSlowMode);
-//        this.backRightMotor.set(backRightPower * finalSlowMode);
-
         this.frontLeftMotor.setPower(frontLeftPower * finalSlowMode);
         this.backLeftMotor.setPower(backLeftPower * finalSlowMode);
         this.frontRightMotor.setPower(frontRightPower * finalSlowMode);
         this.backRightMotor.setPower(backRightPower * finalSlowMode);
     }
 
+    // currently unused but might be useful later
     public void robotOrientedDrive(double forward, double strafe, double rotate) {
         double frontLeftPower = forward + strafe + rotate;
         double backLeftPower = forward - strafe + rotate;
@@ -119,6 +113,7 @@ public class MecanumDrive {
         backRightMotor.setPower(maxSpeed * (backRightPower / maxPower));
     }
 
+    // currently unused but might be useful later
     public void fieldOrientedDrive(double forward, double strafe, double rotate) {
         double theta = Math.atan2(forward,strafe);
         double r = Math.hypot(strafe, forward);
