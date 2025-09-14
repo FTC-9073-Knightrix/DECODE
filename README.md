@@ -1,3 +1,5 @@
+## DEPRECATED REPO, USE 2025-2026-DECODE REPO TO FIND 9073 ROBOT CODE FOR THE DECODE SEASON
+
 ## NOTICE
 
 This repository contains the public FTC SDK for the INTO THE DEEP (2024-2025) competition season.
